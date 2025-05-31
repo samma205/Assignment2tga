@@ -1,28 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Assignment2tga.Models;
-using System.Web.Mvc;
 using System.Data.SqlClient;
+using System.Web.Mvc;
+using Assignment2tga.Models;
 
 namespace Assignment2tga.Controllers
 {
-	public class TourController : Controller
-	{
-        static string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog = Tourguidedatabase; Integrated Security = True; Connect Timeout = 30; Encrypt=False;Trust Server Certificate=False;Application Intent = ReadWrite; Multi Subnet Failover=False;";
+    public class TourController : Controller
+    {
+        static string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Tourguidedatabase;Integrated Security=True;";
 
-
-        // READ - List all Tours
+        // READ - List all tours
         public ActionResult Index()
         {
             List<TourModel> tours = new List<TourModel>();
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                conn.Open();
+                connection.Open();
                 string query = "SELECT * FROM Tour";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlCommand cmd = new SqlCommand(query, connection))
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -33,8 +30,8 @@ namespace Assignment2tga.Controllers
                             FirstName = reader["FirstName"].ToString(),
                             LastName = reader["LastName"].ToString(),
                             TourDate = Convert.ToDateTime(reader["TourDate"]),
-                            GuideID = Convert.ToInt32(reader["GuideID"]),
-                            price = Convert.ToInt32(reader["price"])
+                            GuideID = (int)reader["GuideID"],
+                            price = (int)reader["price"]
                         });
                     }
                 }
@@ -43,52 +40,43 @@ namespace Assignment2tga.Controllers
             return View(tours);
         }
 
-        // CREATE - Display form
+        // CREATE - Show form
         public ActionResult Create()
         {
             return View();
         }
 
-        // CREATE - Handle form submit
+        // CREATE - Save form
         [HttpPost]
         public ActionResult Create(TourModel tour)
         {
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                connection.Open();
+                string query = "INSERT INTO Tour (FirstName, LastName, TourDate, GuideID, price) VALUES (@FirstName, @LastName, @TourDate, @GuideID, @price)";
+                using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
-                    conn.Open();
-                    string query = "INSERT INTO Tour (FirstName, LastName, TourDate, GuideID, Price) VALUES (@FirstName, @LastName, @TourDate, @GuideID, @Price)";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@FirstName", tour.FirstName);
-                        cmd.Parameters.AddWithValue("@LastName", tour.LastName);
-                        cmd.Parameters.AddWithValue("@TourDate", tour.TourDate);
-                        cmd.Parameters.AddWithValue("@GuideID", tour.GuideID);
-                        cmd.Parameters.AddWithValue("@Price", tour.price);
-                        cmd.ExecuteNonQuery();
-                    }
+                    cmd.Parameters.AddWithValue("@FirstName", tour.FirstName);
+                    cmd.Parameters.AddWithValue("@LastName", tour.LastName);
+                    cmd.Parameters.AddWithValue("@TourDate", tour.TourDate);
+                    cmd.Parameters.AddWithValue("@GuideID", tour.GuideID);
+                    cmd.Parameters.AddWithValue("@price", tour.price);
+                    cmd.ExecuteNonQuery();
                 }
-
-                return RedirectToAction("Index");
             }
-            catch (Exception ex)
-            {
-                ViewBag.Error = ex.Message;
-                return View();
-            }
+            return RedirectToAction("Index");
         }
 
-        // UPDATE - Show form
+        // UPDATE - Show form with data
         public ActionResult Edit(int id)
         {
             TourModel tour = new TourModel();
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                conn.Open();
+                connection.Open();
                 string query = "SELECT * FROM Tour WHERE Id = @Id";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
                     cmd.Parameters.AddWithValue("@Id", id);
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -99,8 +87,8 @@ namespace Assignment2tga.Controllers
                             tour.FirstName = reader["FirstName"].ToString();
                             tour.LastName = reader["LastName"].ToString();
                             tour.TourDate = Convert.ToDateTime(reader["TourDate"]);
-                            tour.GuideID = Convert.ToInt32(reader["GuideID"]);
-                            tour.price = Convert.ToInt32(reader["price"]);
+                            tour.GuideID = (int)reader["GuideID"];
+                            tour.price = (int)reader["price"];
                         }
                     }
                 }
@@ -109,60 +97,44 @@ namespace Assignment2tga.Controllers
             return View(tour);
         }
 
-        // UPDATE - Handle submit
+        // UPDATE - Save changes
         [HttpPost]
         public ActionResult Edit(TourModel tour)
         {
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                connection.Open();
+                string query = "UPDATE Tour SET FirstName = @FirstName, LastName = @LastName, TourDate = @TourDate, GuideID = @GuideID, price = @price WHERE Id = @Id";
+                using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
-                    conn.Open();
-                    string query = "UPDATE Tour SET FirstName = @FirstName, LastName = @LastName, TourDate = @TourDate, GuideID = @GuideID, Price = @Price WHERE Id = @Id";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@Id", tour.Id);
-                        cmd.Parameters.AddWithValue("@FirstName", tour.FirstName);
-                        cmd.Parameters.AddWithValue("@LastName", tour.LastName);
-                        cmd.Parameters.AddWithValue("@TourDate", tour.TourDate);
-                        cmd.Parameters.AddWithValue("@GuideID", tour.GuideID);
-                        cmd.Parameters.AddWithValue("@price", tour.price);
-                        cmd.ExecuteNonQuery();
-                    }
+                    cmd.Parameters.AddWithValue("@Id", tour.Id);
+                    cmd.Parameters.AddWithValue("@FirstName", tour.FirstName);
+                    cmd.Parameters.AddWithValue("@LastName", tour.LastName);
+                    cmd.Parameters.AddWithValue("@TourDate", tour.TourDate);
+                    cmd.Parameters.AddWithValue("@GuideID", tour.GuideID);
+                    cmd.Parameters.AddWithValue("@price", tour.price);
+                    cmd.ExecuteNonQuery();
                 }
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Error = ex.Message;
-                return View(tour);
-            }
+            return RedirectToAction("Index");
         }
 
         // DELETE
         public ActionResult Delete(int id)
         {
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                connection.Open();
+                string query = "DELETE FROM Tour WHERE Id = @Id";
+                using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
-                    conn.Open();
-                    string query = "DELETE FROM Tour WHERE Id = @Id";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@Id", id);
-                        cmd.ExecuteNonQuery();
-                    }
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.ExecuteNonQuery();
                 }
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Error = ex.Message;
-                return View("Error");
-            }
+            return RedirectToAction("Index");
         }
     }
 }

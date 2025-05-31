@@ -2,32 +2,78 @@
     ViewBag.Title = "Home Page";
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+
+<div class="container mt-5">
+    <div class="text-center bg-light p-5 rounded shadow-sm">
+        <h1 class="display-4">Tour Guide Adventures</h1>
+        <p class="lead">Welcome! Explore exciting tours, grab amazing deals, and share your experiences with us.</p>
     </div>
-</main>
+
+    <div class="row text-center mt-5">
+        <div class="col-md-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">View Tours</h5>
+                    <p class="card-text">Browse our available tours and pick your next adventure.</p>
+                    <a href="/Tour/Index" class="btn btn-outline-primary">View Tours</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Special Deals</h5>
+                    <p class="card-text">Check out our latest deals and discounts.</p>
+                    <a href="/SpecialDeals/Index" class="btn btn-outline-success">See Deals</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Book a Tour</h5>
+                    <p class="card-text">Reserve your spot on one of our popular tours today.</p>
+                    <a href="/Booking/Create" class="btn btn-outline-warning">Book Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Leave Feedback</h5>
+                    <p class="card-text">Let us know how your tour went. We love your feedback!</p>
+                    <a href="/Feedback/Create" class="btn btn-outline-info">Submit Feedback</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="card shadow-sm border-0 bg-light">
+            <div class="card-header bg-dark text-white">
+                <h4 class="mb-0">Admin Section</h4>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Admin-only features for managing site content:</p>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <a href="/Booking/Index" class="text-decoration-none">Manage Bookings</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/Guide/Index" class="text-decoration-none">Manage Guides</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/Feedback/Index" class="text-decoration-none">Review Feedback</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/SpecialDeals/Create" class="text-decoration-none">Add Special Deal</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+

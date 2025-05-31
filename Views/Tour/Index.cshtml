@@ -1,58 +1,41 @@
-﻿@model IEnumerable<Assignment2tga.Models.TourModel>
+﻿@model List<Assignment2tga.Models.TourModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tours";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2 class="text-center my-4">Tour List</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New Tour", "Create", null, new { @class = "btn btn-primary mb-3" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TourDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GuideID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.price)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TourDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GuideID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.price)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Tour Date</th>
+            <th>Guide ID</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tour in Model)
+        {
+            <tr>
+                <td>@tour.FirstName</td>
+                <td>@tour.LastName</td>
+                <td>@tour.TourDate.ToString("yyyy-MM-dd")</td>
+                <td>@tour.GuideID</td>
+                <td>$@tour.price</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = tour.Id }, new { @class = "btn btn-warning btn-sm me-1" })
+                    @Html.ActionLink("Delete", "Delete", new { id = tour.Id }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

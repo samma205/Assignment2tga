@@ -15,6 +15,13 @@ namespace Assignment2tga.Controllers
     public class HomeController : Controller
     {
         static string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog = Tourguidedatabase; Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False; MultiSubnetFailover=False;";
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+
         public ActionResult IndexCustomer()
         {
             List<CustomersModel> customers = new List<CustomersModel>();
