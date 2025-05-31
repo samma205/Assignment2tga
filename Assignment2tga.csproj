@@ -123,6 +123,7 @@
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\GuideController.cs" />
+    <Compile Include="Controllers\SpecialdealsController.cs" />
     <Compile Include="Controllers\TourController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -130,6 +131,7 @@
     </Compile>
     <Compile Include="Models\BookingModel.cs" />
     <Compile Include="Models\FeedbackModel.cs" />
+    <Compile Include="Models\SpecialdealsModel.cs" />
     <Compile Include="Models\TourModel.cs" />
     <Compile Include="Models\GuideModel.cs" />
     <Compile Include="Models\CustomersModel.cs" />
@@ -209,6 +211,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Specialdeals\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
