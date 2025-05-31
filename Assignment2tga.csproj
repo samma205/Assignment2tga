@@ -208,10 +208,13 @@
     <Content Include="Views\Feedback\Delete.cshtml" />
     <Content Include="Views\Feedback\Edit.cshtml" />
     <Content Include="Views\Feedback\Index.cshtml" />
+    <Content Include="Views\Specialdeals\Index.cshtml" />
+    <Content Include="Views\Specialdeals\Edit.cshtml" />
+    <Content Include="Views\Specialdeals\Delete.cshtml" />
+    <Content Include="Views\Specialdeals\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Specialdeals\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
