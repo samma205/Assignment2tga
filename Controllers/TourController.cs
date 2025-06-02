@@ -53,14 +53,16 @@ namespace Assignment2tga.Controllers
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "INSERT INTO Tour (FirstName, LastName, TourDate, GuideID, price) VALUES (@FirstName, @LastName, @TourDate, @GuideID, @price)";
+                string query = "INSERT INTO Tour (Id, FirstName, LastName, TourDate, GuideID, price) VALUES (@Id, @FirstName, @LastName, @TourDate, @GuideID, @price)";
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
+                    cmd.Parameters.AddWithValue("@Id", tour.Id);
                     cmd.Parameters.AddWithValue("@FirstName", tour.FirstName);
                     cmd.Parameters.AddWithValue("@LastName", tour.LastName);
                     cmd.Parameters.AddWithValue("@TourDate", tour.TourDate);
                     cmd.Parameters.AddWithValue("@GuideID", tour.GuideID);
                     cmd.Parameters.AddWithValue("@price", tour.price);
+
                     cmd.ExecuteNonQuery();
                 }
             }

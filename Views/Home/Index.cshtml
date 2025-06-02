@@ -1,22 +1,20 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Admin Dashboard";
 }
-
-
 
 <div class="container mt-5">
     <div class="text-center bg-light p-5 rounded shadow-sm">
-        <h1 class="display-4">Tour Guide Adventures</h1>
-        <p class="lead">Welcome! Explore exciting tours, grab amazing deals, and share your experiences with us.</p>
+        <h1 class="display-4">Admin Dashboard - Tour Guide Adventures</h1>
+        <p class="lead">Welcome back! Use the dashboard below to manage tours, bookings, guides, feedback, and special deals.</p>
     </div>
 
     <div class="row text-center mt-5">
         <div class="col-md-3">
             <div class="card h-100 shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">View Tours</h5>
-                    <p class="card-text">Browse our available tours and pick your next adventure.</p>
-                    <a href="/Tour/Index" class="btn btn-outline-primary">View Tours</a>
+                    <h5 class="card-title">Manage Tours</h5>
+                    <p class="card-text">View, create, update or delete tour records.</p>
+                    <a href="/Tour/Index" class="btn btn-outline-primary">Go to Tours</a>
                 </div>
             </div>
         </div>
@@ -24,9 +22,9 @@
         <div class="col-md-3">
             <div class="card h-100 shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">Special Deals</h5>
-                    <p class="card-text">Check out our latest deals and discounts.</p>
-                    <a href="/SpecialDeals/Index" class="btn btn-outline-success">See Deals</a>
+                    <h5 class="card-title">Manage Deals</h5>
+                    <p class="card-text">Add or update special promotional deals.</p>
+                    <a href="/SpecialDeals/Index" class="btn btn-outline-success">View Deals</a>
                 </div>
             </div>
         </div>
@@ -34,9 +32,11 @@
         <div class="col-md-3">
             <div class="card h-100 shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">Book a Tour</h5>
-                    <p class="card-text">Reserve your spot on one of our popular tours today.</p>
-                    <a href="/Booking/Create" class="btn btn-outline-warning">Book Now</a>
+                    <h5 class="card-title">Manage Bookings</h5>
+                    <p class="card-text">Review or manage customer bookings.</p>
+                    <a href="/Booking/Index" class="btn btn-outline-warning">Go to Bookings</a>
+
+
                 </div>
             </div>
         </div>
@@ -44,36 +44,31 @@
         <div class="col-md-3">
             <div class="card h-100 shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">Leave Feedback</h5>
-                    <p class="card-text">Let us know how your tour went. We love your feedback!</p>
-                    <a href="/Feedback/Create" class="btn btn-outline-info">Submit Feedback</a>
+                    <h5 class="card-title">Review Feedback</h5>
+                    <p class="card-text">Read customer reviews and feedback forms.</p>
+                    <a href="/Feedback/Index" class="btn btn-outline-info">View Feedback</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container mt-5">
-        <div class="card shadow-sm border-0 bg-light">
-            <div class="card-header bg-dark text-white">
-                <h4 class="mb-0">Admin Section</h4>
-            </div>
-            <div class="card-body">
-                <p class="text-muted">Admin-only features for managing site content:</p>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <a href="/Booking/Index" class="text-decoration-none">Manage Bookings</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="/Guide/Index" class="text-decoration-none">Manage Guides</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="/Feedback/Index" class="text-decoration-none">Review Feedback</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="/SpecialDeals/Create" class="text-decoration-none">Add Special Deal</a>
-                    </li>
-                </ul>
+    <div class="row text-center mt-4">
+        <div class="col-md-6 offset-md-3">
+            <div class="card shadow-sm border-0 bg-light">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0">Other Admin Tools</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="/Guide/Index" class="text-decoration-none">Manage Tour Guides</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-
+</div>

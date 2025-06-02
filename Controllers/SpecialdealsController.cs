@@ -39,7 +39,7 @@ namespace Assignment2tga.Controllers
 
 
             }
-            return View();
+            return View(deals);
         } 
         //Create
         [HttpGet]
@@ -55,10 +55,11 @@ namespace Assignment2tga.Controllers
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    string query = "INSERT INTO SpecialDeals (Title,Description,Discount) VALUES (@Title,@Description,@Discount)";
+                    string query = "INSERT INTO SpecialDeals (Id,Title,Description,Discount) VALUES (@Id,@Title,@Description,@Discount)";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("Title", deal.Title);
+                        cmd.Parameters.AddWithValue("@Id", deal.Id);
+                        cmd.Parameters.AddWithValue("@Title", deal.Title);
                         cmd.Parameters.AddWithValue("@Description", deal.Description);
                         cmd.Parameters.AddWithValue("@Discount", deal.Discount);
                         cmd.ExecuteNonQuery();
@@ -82,7 +83,7 @@ namespace Assignment2tga.Controllers
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    string query = "SELECT* FROM SpecialDeals WHERE DealId =@Id";
+                    string query = "SELECT* FROM SpecialDeals WHERE Id =@Id";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@Id", id);
