@@ -110,5 +110,71 @@ namespace Assignment2tga.Controllers
                     return View("Error");
                 }
             }
+        // GET: Booking/Edit/5
+        public ActionResult Edit(int id)
+        {
+            BookingModel booking = null;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "SELECT * FROM Booking WHERE Id = @Id";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", id);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            booking = new BookingModel
+                            {
+                                Id = (int)reader["Id"],
+                                CustomerID = (int)reader["CustomerID "],
+                                TourID = (int)reader["TourID"],
+                                BookingDate = (DateTime)reader["BookingDate"]
+                            };
+                        }
+                    }
+                }
+            }
+
+            if (booking == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(booking);
         }
+
+        // POST: Booking/Edit/5
+        [HttpPost]
+        public ActionResult Edit(BookingModel booking)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "UPDATE Booking SET CustomerID = @CustomerID, TourID = @TourID, BookingDate = @BookingDate WHERE Id = @Id";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@CustomerID", booking.CustomerID);
+                        cmd.Parameters.AddWithValue("@TourID", booking.TourID);
+                        cmd.Parameters.AddWithValue("@BookingDate", booking.BookingDate);
+                        cmd.Parameters.AddWithValue("@Id", booking.Id);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View(booking);
+            }
+        }
+
     }
+}

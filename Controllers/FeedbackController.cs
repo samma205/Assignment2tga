@@ -12,7 +12,7 @@ namespace Assignment2tga.Controllers
     {
         static string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Tourguidedatabase;Integrated Security=True;";
 
-        // GET: Feedback
+        
         public ActionResult Index()
         {
             List<FeedbackModel> feedbacks = new List<FeedbackModel>();
@@ -75,6 +75,7 @@ namespace Assignment2tga.Controllers
                 ViewBag.Error = ex.Message;
                 return View();
             }
+
         }
 
         // EDIT

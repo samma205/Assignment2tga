@@ -8,7 +8,8 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0">Manage Tours</h2>
-        @Html.ActionLink("Create New Tour", "Create", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Create", "Create") 
+
     </div>
 
     @if (Model != null && Model.Count > 0)
@@ -36,8 +37,8 @@
                             <td>$@tour.price</td>
                             <td>
                                 <div class="d-flex gap-2">
-                                    @Html.ActionLink("Edit", "Edit", new { id = tour.Id }, new { @class = "btn btn-sm btn-warning" })
-                                    @Html.ActionLink("Delete", "Delete", new { id = tour.Id }, new { @class = "btn btn-sm btn-danger" })
+                                    @Html.ActionLink("Edit", "Edit", new { id = tour.Id })
+                                    @Html.ActionLink("Delete", "Delete", new { id = tour.Id })
                                 </div>
                             </td>
                         </tr>
